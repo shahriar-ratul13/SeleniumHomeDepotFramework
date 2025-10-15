@@ -1,16 +1,15 @@
 import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 
 public class ExtentManager {
 
     private static ExtentReports extent;
 
-    public static ExtentReports createreport(String file){
-        ExtentSparkReporter extentSparkReporter = new ExtentSparkReporter(file);
+    public static ExtentReports createInstance(String file){
+
+        ExtentHtmlReporter extentHtmlReporter = new ExtentHtmlReporter(file);
         extent = new ExtentReports();
-        extent.attachReporter(extentSparkReporter);
+        extent.attachReporter(extentHtmlReporter);
         return extent;
-
-
     }
 }

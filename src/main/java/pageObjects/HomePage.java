@@ -10,6 +10,8 @@ import java.util.List;
 // Store WebElements from homepage to be used in testing
 public class HomePage extends Base {
 
+    // WEB ELEMENTS / LOCATORS
+
     // Search Bar web element using xpath
     @FindBy (xpath = "//input[@id='typeahead-search-field-input']")
     WebElement searchBar;
@@ -22,7 +24,7 @@ public class HomePage extends Base {
     WebElement searchResult;
 
     @FindBy (css = "ul[class='sui-flex sui-flex-col sui-flex-wrap sui-list-none sui-justify-center']")
-    List<WebElement> footerItems;
+    public List<WebElement> footerItems;
 
     @FindBy (xpath = "//button[@aria-label='open drawer to view Shop All']//div[@class='sui-flex']//*[name()='svg']")
     WebElement shopAllButton;
@@ -34,29 +36,14 @@ public class HomePage extends Base {
     @FindBy (xpath = "//div[@data-testid='content-menu-data']")
     List<WebElement> departmentMenuItems;
 
+    @FindBy (xpath = "//button[contains(@aria-label,'open drawer to view Account')]//div[contains(@class,'sui-flex')]//*[name()='svg']")
+    WebElement loginIcon;
 
-    // initiate search
-    public void searchHomeDepot(String searchTerm) {
-        waitExplicitlyForVisible(searchBar);
-        searchBar.click();
-        searchBar.sendKeys(searchTerm);
-        waitExplicitlyForClickable(searchButton);
-        searchButton.click();
-    }
+    @FindBy (xpath = "//a[normalize-space()='Sign in']")
+    WebElement signInButton;
 
-    // Check if search result is displayed
-    public boolean verifySearch() {
-        waitExplicitlyForVisible(searchResult);
-        return searchResult.isDisplayed();
-    }
-
-    public ArrayList<String> storeFooterItems() {
-        ArrayList<String> footers = new ArrayList<>();
-        for (WebElement footer : footerItems) {
-            footers.add(footer.getText());
-        }
-        return footers;
-    }
+    @FindBy (xpath = "//label[@id='username-label']")
+    WebElement emailAddressText;
 
     public String expectedFooters = "[Customer Service Center\n" +
             "Check Order Status\n" +
@@ -89,7 +76,45 @@ public class HomePage extends Base {
             "Corporate Responsibility\n" +
             "Home Depot Licensing Information]";
 
+
+    // ACTION METHODS
+
+    // initiate search
+    public void searchHomeDepot(String searchTerm) {
+        waitExplicitlyForVisible(searchBar);
+        searchBar.click();
+        searchBar.sendKeys(searchTerm);
+        waitExplicitlyForClickable(searchButton);
+        searchButton.click();
+    }
+
+    // Check if search result is displayed
+    public boolean verifySearch() {
+        waitExplicitlyForVisible(searchResult);
+        return searchResult.isDisplayed();
+    }
+
+    public ArrayList<String> storeFooterItems() {
+        ArrayList<String> footers = new ArrayList<>();
+        for (WebElement footer : footerItems) {
+            footers.add(footer.getText());
+        }
+        return footers;
+    }
+
+    // Interact with login button on Homepage
+    public String verifyLogin() {
+        waitExplicitlyForClickable(loginIcon);
+        loginIcon.click();
+        waitExplicitlyForClickable(signInButton);
+        signInButton.click();
+        waitExplicitlyForVisible(emailAddressText);
+        return emailAddressText.getText();
+    }
+
+
     // Get List of Department menu items
 //    public void
+
 
 }

@@ -53,12 +53,27 @@ public class HomePageTest extends Base {
     }
 
     @Test (priority = 4)
+    void validateFooterCategoryNumber() {
+        int actualFootersCategoryNumber = homePage.storeFooterItems().size();
+        int expectedFootersCategoryNumber = 3;
+        assertEquals(actualFootersCategoryNumber, expectedFootersCategoryNumber, "Error: numbers did not match");
+    }
+
+    // Fail on purpose for negative test
+    @Test (priority = 5)
     void failValidationTitle() {
         String actualTitle = driver.getTitle();
         String expectedTitle = "Da Home Depot";
         assertEquals(actualTitle, expectedTitle, "Error: Wrong title");
     }
 
+
+    @Test (priority = 6)
+    void testNavigateToLoginPage(){
+        String actualText = homePage.verifyLogin();
+        String expectedText = "Email Address";
+        assertEquals(actualText, expectedText, "Error: Text did not match");
+    }
 
 //    @Test
 //    void validateShopByDepartment() {
@@ -68,11 +83,11 @@ public class HomePageTest extends Base {
 //        WebElement department = driver.findElement(By.xpath("//div[@data-testid=\"menu-item-id-55wMslXkSs72uOz4boTl75\"]/span/div[2]/span"));
 //        waitExplicitlyForClickable(department);
 //        department.click();
-////        List<WebElement> departmentItems = driver.findElements(By.xpath("//div[@data-testid='content-menu-data']"));
+//      List<WebElement> departmentItems = driver.findElements(By.xpath("//div[@data-testid='content-menu-data']"));
 //
-////        for (WebElement e : departmentItems) {
-////            System.out.println(e.getText());
-////        }
+//     for (WebElement e : departmentItems) {
+//           System.out.println(e.getText());
+//       }
 //
 //    }
 

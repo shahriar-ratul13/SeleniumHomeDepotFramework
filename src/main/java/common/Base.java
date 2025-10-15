@@ -176,10 +176,11 @@ public class Base {
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    // UTILITIES
-
-    public void takeScreenshot(String testName) {
-        // placeholder
+    // Explicitly wait for all elements to be visible
+    public void waitExplicitlyForAllElements(List<WebElement> elements) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
+
 
 }
